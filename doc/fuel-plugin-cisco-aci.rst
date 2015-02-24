@@ -41,7 +41,7 @@ Right now Fuel supports 4 types of network configurations:
 * Legacy Networking (nova-network)
 
 When successfully copied to the Fuel Master node and installed, a new submenu will appear on the Settings tab of the Fuel web UI.
-End user will have to select a radiobutton with Useк Stories described below.
+End user will have to select a radiobutton with User Stories described below.
 
 User Story 1: Generic APIC ML2 driver
 ---------------------------------------------------
