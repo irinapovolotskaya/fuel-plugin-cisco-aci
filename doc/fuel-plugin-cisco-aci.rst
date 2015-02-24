@@ -41,7 +41,7 @@ Right now Fuel supports 4 types of network configurations:
 * Legacy Networking (nova-network)
 
 When successfully copied to the Fuel Master node and installed, a new submenu will appear on the Settings tab of the Fuel web UI.
-End user will have to select a radiobutton with Use Cases described below.
+End user will have to select a radiobutton with Useк Stories described below.
 
 User Story 1: Generic APIC ML2 driver
 ---------------------------------------------------
@@ -86,9 +86,9 @@ This list describes what software and configuration should be added to correspon
     l2_population=False
     arp_responder=False
 
-Where **$integration_bridge** , **$physnets_dev**, **$vlan_range** should be configured through the Fuel web UI in Networks->Neutron L2 Configuration section.
+Where **$integration_bridge** , **$physnets_dev**, **$vlan_range** should be configured through the Fuel web UI in Neutron L2 Configuration section of the Networks tab.
 
-* All hosts will have these configurations in *<ml2_conf_cisco.ini>*:
+* All hosts will have these configurations in *ml2_conf_cisco.ini* file:
 
   ::
 
@@ -100,17 +100,18 @@ Where **$integration_bridge** , **$physnets_dev**, **$vlan_range** should be con
     apic_password=$apic_password
     apic_name_mapping=use_name
 
-Where **$apic_hosts**, **$apic_username**, **$apic_password** - should be configured through Fuel web UI in Settings->Access section.
+Where **$apic_hosts**, **$apic_username**, **$apic_password** - should be configured through the Fuel web UI in the Access section
+of the Settings tab.
 
 * All controllers will have neutron-driver-apic-svc-agent package installed
-* All hosts *<ml2_config_cisco.ini>* will have [apic_external_network:ext] section, if configured though Fuel web UI.
+* All hosts *ml2_config_cisco.ini* will have [apic_external_network:ext] section, if configured through the Fuel web UI.
 
-This list describes what software and configuration should be added to corresponding hosts to support US1 with static config chosen:
+This list describes what software and configuration should be added to the corresponding hosts to support User Story 1 with static config chosen:
 
 * All controllers have pip apicapi installed
 * neutron-driver-apic-svc-agent neutron-driver-apic-agent and lldp is not installed
 * All configurations are the same as "Auto discovery" way
-* On all hosts in *<ml2_config_cisco.ini>* file we will be added example(user-defined) section configured through Fuel web UI.
+* On all hosts in *ml2_config_cisco.ini* file, we will add an example (user-defined) section configured through the Fuel web UI.
 
   ::
 
@@ -118,7 +119,8 @@ This list describes what software and configuration should be added to correspon
     compute11,compute21=1/10
     compute12=1/11
 
-* For both cases (autodiscovery and static) configs on controller nodes, *<neutron.conf>* should have admin credentials:
+* For both cases (autodiscovery and static), configuration files
+  on controller nodes (*neutron.conf*) should have admin credentials:
 
   ::
 
@@ -127,15 +129,15 @@ This list describes what software and configuration should be added to correspon
     admin_password="$admin_password"
     admin_tenant_name="$admin_tenant"
 
-Where **$admin_username**, **$admin_password** and **$admin_tenant** point to cloud administrator credentials.
+Where **$admin_username**, **$admin_password** and **$admin_tenant** point to the cloud administrator credentials.
 
 User Story 2: GBP module and Mapping driver
 -------------------------------------------------------------
 
-This case will provide availability to configure Neutron for using Cisco SDN solution based on Cisco group based policy packages.
-This list describes what software and configuration should be added to corresponding hosts to support User Story 2.
+This case will provide availability to configure Neutron for using Cisco SDN solution that is targeted at Cisco group-based policy packages. 
+This list describes what software and configuration should be added to the corresponding hosts to support User Story 2.
 
-* All controllers will have these configurations in *<neutron.conf>*:
+* All controllers will have these configurations in *neutron.conf* file:
 
   ::
 
@@ -159,7 +161,7 @@ This list describes what software and configuration should be added to correspon
     quota_router = -1
     quota_floatingip = -1
 
-* All controllers will have these configurations in *<ml2_conf.ini>*:
+* All controllers will have these configurations in *ml2_conf.ini* file:
 
   ::
 
@@ -181,9 +183,10 @@ This list describes what software and configuration should be added to correspon
     l2_population=False
     arp_responder=False
 
-Where **$integration_bridge**, **$physnets_dev**, **$vlan_range** - should be configured through Fuel web UI in Networks->Neutron L2 Configuration section.
+Where **$integration_bridge**, **$physnets_dev**, **$vlan_range** - should be configured through the
+Fuel web UI in the Neutron L2 Configuration section of the Networks tab.
 
-* All controllers will have these configurations in *<ml2_conf_cisco.ini>*:
+* All controllers will have these configurations in *ml2_conf_cisco.ini* file:
 
   ::
 
@@ -195,7 +198,8 @@ Where **$integration_bridge**, **$physnets_dev**, **$vlan_range** - should be co
     apic_password=$apic_password
     apic_name_mapping=use_name
 
-Where **$apic_hosts**, **$apic_username**, **$apic_password** - should be configured through Fuel web UI  in Settings->Access section.
+Where **$apic_hosts**, **$apic_username**, **$apic_password** - should be configured through the Fuel web UI in the Access section of the
+Settings tab.
 
 * All controllers will have 4 additional package installed:
 
@@ -204,7 +208,7 @@ Where **$apic_hosts**, **$apic_username**, **$apic_password** - should be config
   * group-based-policy-ui
   * group-based-policy-automation
 
-* All controllers will enable heat plugin in *<heat.conf>*
+* All controllers will enable heat plugin in *heat.conf* file:
 
   ::
 
@@ -212,13 +216,14 @@ Where **$apic_hosts**, **$apic_username**, **$apic_password** - should be config
     plugin_dirs=/path/to/code/gbpautomation/heat
 
 * All controllers will enable Horizon projects by linking *project.py* file to enabled_dashboards directory.
-* All hosts *<ml2_config_cisco.ini>* will have [apic_external_network:ext] section, if configured though Fuel web UI.
+* All hosts will have [apic_external_network:ext] section in the *ml2_config_cisco.ini* file, if configured though Fuel web UI.
 
 User Story 3: GBP module and APIC driver
 ---------------------------------------------------------
 
-This case will provide availability to configure Neutron for using Cisco SDN solution based on Cisco group based policy packages and APIC Controller.
-This list describes what software and configuration should be added to corresponding hosts to support User Story 3.
+This case will provide availability to configure Neutron for using Cisco SDN solution that is targeted at Cisco group-based policy packages
+and APIC Controller.
+This list describes what software and configuration should be added to the corresponding hosts to support User Story 3.
 
 * All controllers will have 4 additional package installed:
 
@@ -227,29 +232,30 @@ This list describes what software and configuration should be added to correspon
   * group-based-policy-ui
   * group-based-policy-automation
 
-* All controllers will have these configurations in *<neutron.conf>*:
+* All controllers will have these configurations in *neutron.conf* file:
 
   ::
 
     Paste config here
 
-* All controllers will have these configurations in *<ml2_conf.ini>*:
+* All controllers will have these configurations in *ml2_conf.ini* file:
 
   ::
 
     Paste config here
 
-* All controllers will have these configurations in *<ml2_conf_cisco.ini>*:
+* All controllers will have these configurations in *ml2_conf_cisco.ini* file:
 
   ::
 
     Paste config here
 
-* All hosts *<ml2_config_cisco.ini>* will have [apic_external_network:ext] section, if configured though Fuel web UI.
+* All hosts will have [apic_external_network:ext] section in the *ml2_config_cisco.ini* file,
+  if configured though Fuel web UI.
 
 * All controllers have pip apicapi installed
 
-* Do we need lldp for this case ? if yes - install necessary packages on all hosts.
+* It is necessary to decide if lldp is required for this case: if yes - install necessary packages on all hosts.
 
 
 Alternatives
@@ -260,7 +266,8 @@ There are no known alternatives for this plugin, although all steps can be perfo
 Data model impact
 -------------------------
 
-GBP installation type requires additional tables in Neutron database. New scheme will be managed by `gbp-db-manage` command that comes from group-based-policy package.
+GBP installation type requires additional tables in Neutron database.
+New scheme will be managed by `gbp-db-manage` command that comes from group-based-policy package.
 
 REST API impact
 ---------------
@@ -275,7 +282,9 @@ Upgrading should be tested explicitly with this plugin installed and APIC contro
 Security impact
 ---------------
 
-This plugin changes Neutron keystone_authtoken credentials from `neutron` user and `services` tenant to `admin` user and `admin` tenant on controller nodes. This may change in future, but for Juno this must be set to admin values.
+This plugin changes Neutron keystone_authtoken credentials from `neutron` user and `services`
+tenant to `admin` user and `admin` tenant on controller nodes. This may change in future, but
+for Juno release this must be set to admin values.
 
 Notifications impact
 --------------------
@@ -290,7 +299,7 @@ None.
 Plugin impact
 -------------
 
-This plugin should not impact other plugins until they don't modify the same settings for Neutron configuration.
+This plugin should not impact other plugins until they do not modify the same settings for Neutron configuration.
 
 Other deployer impact
 ---------------------
@@ -305,14 +314,14 @@ Implementation
 Assignee(s)
 -----------
 Primary assignee:
- <nkoshikov@mirantis.com>
+    Nikita Koshikov - nkoshikov@mirantis.com
 
 Work Items
 ----------
 
 * Create fuel-plugin-cisco-aci plugin
 
-* Develop Fuel web UI part
+* Develop the Fuel web UI part of the plugin
 
 * Add puppet support for all configuration cases
 
